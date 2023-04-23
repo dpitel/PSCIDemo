@@ -38,8 +38,7 @@ jobs:
     - name: Install CLI-beta
       run: |
         cd ../..
-        Set-Location -Path (Get-Location)
-        CWD=$(Get-Location).path
+        CWD="$(pwd)"
         python3 -m venv oidc-venv
         . oidc-venv/bin/activate
         echo "activated environment"
