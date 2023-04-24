@@ -5,7 +5,8 @@ on:
 
 env:
   AZURE_WEBAPP_PACKAGE_PATH: '.'
-  AZURE_WEBAPP_NAME: PSDeployDemo
+  AZURE_WEBAPP_NAME: PSDeployDemoDima
+
 
 jobs:
   build:
