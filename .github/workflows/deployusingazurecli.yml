@@ -48,3 +48,6 @@ jobs:
         inlineScript: |
           az login --identity
           az webapp deploy --resource-group PSdemo --name ${{ env.AZURE_WEBAPP_NAME }} --type zip --src-path ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/deployfile.zip
+
+    - name: Print environment variables
+      run: env
