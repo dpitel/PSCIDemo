@@ -5,7 +5,7 @@ on:
 
 env:
   AZURE_WEBAPP_PACKAGE_PATH: '.'
-  AZURE_WEBAPP_NAME: PSdemo
+  AZURE_WEBAPP_NAME: PSDeployDemoDima
 
 
 jobs:
@@ -14,7 +14,7 @@ jobs:
       BUILD_CONFIG: Release
       DOT_NET_VERSION: 6.0.x
       
-    runs-on: [self-hosted, linux, docker]
+    runs-on: self-hosted
 
     steps:
     - uses: actions/checkout@v2
@@ -44,7 +44,7 @@ jobs:
     - name: "Login and deploy to App Service"
       uses: azure/CLI@v1
       with:
-        azcliversion: 2.24.2
+        azcliversion: 2.47
         inlineScript: |
           az login --identity
           az webapp deploy --resource-group PSdemo --name ${{ env.AZURE_WEBAPP_NAME }} --type zip --src-path ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/deployfile.zip
