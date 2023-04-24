@@ -44,7 +44,7 @@ jobs:
     - name: "Login and deploy to App Service"
       uses: azure/CLI@v1
       with:
-        azcliversion:  2.0.81
+        azcliversion:  2.47
         inlineScript: |
           az login --identity
           az webapp deploy --resource-group PSdemo --name ${{ env.AZURE_WEBAPP_NAME }} --type zip --src-path ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/deployfile.zip
