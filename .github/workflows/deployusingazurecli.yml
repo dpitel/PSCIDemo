@@ -42,7 +42,7 @@ jobs:
         path: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/deployfile.zip         
              
     - name: "Login and deploy to App Service"
-      uses: azure/CLI@v1
+      uses: azure/CLI@v1.0.3
       with:
         azcliversion:  2.48.1
         inlineScript: |
