@@ -15,6 +15,10 @@ jobs:
       DOT_NET_VERSION: 6.0.x
       
     runs-on: self-hosted
+    steps: 
+      - uses: actions/step-debug@v1
+      - name: My steps
+        run: echo "This better fucking work"
 
     steps:
     - uses: actions/checkout@v2
