@@ -19,38 +19,33 @@ jobs:
       - uses: actions/step-debug@v1
       - name: My steps
         run: echo "This better fucking work"
-
-    steps:
-     - uses: actions/checkout@v2
-    
-     - name: Setup .NET
-       uses: actions/setup-dotnet@v1
-       with:
-         dotnet-version: '${{ env.DOT_NET_VERSION }}'      
+      - uses: actions/checkout@v2
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '${{ env.DOT_NET_VERSION }}'      
         
-     - name: Restore dependencies
-       run: dotnet restore
+      - name: Restore dependencies
+        run: dotnet restore
       
-     - name: Build
-       run: dotnet build --configuration '${{ env.BUILD_CONFIG }}'
+      - name: Build
+        run: dotnet build --configuration '${{ env.BUILD_CONFIG }}'
       
-     - name: Publish
-       run: dotnet publish -c Release -o '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/myapp'
+      - name: Publish
+        run: dotnet publish -c Release -o '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/myapp'
              
-     - name: Zip publish files
-       run: (cd myapp && zip -r ../deployfile.zip .)
+      - name: Zip publish files
+        run: (cd myapp && zip -r ../deployfile.zip .)
              
-     - uses: actions/upload-artifact@v2
-       with:
-         name: zippedpackage
-         path: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/deployfile.zip         
+      - uses: actions/upload-artifact@v2
+        with:
+          name: zippedpackage
+          path: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/deployfile.zip         
              
-     - name: "Login and deploy to App Service"
-       uses: azure/CLI@v1.0.3
-       with:
-         azcliversion:  2.48.1
-         inlineScript: |
-           az login --identity
-           az webapp deploy --resource-group PSdemo --name ${{ env.AZURE_WEBAPP_NAME }} --type zip --src-path ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/deployfile.zip
-
-    
+      - name: "Login and deploy to App Service"
+        uses: azure/CLI@v1.0.3
+        with:
+          azcliversion:  2.48.1
+          inlineScript: |
+            az login --identity
+            az webapp deploy --resource-group PSdemo --name ${{ env.AZURE_WEBAPP_NAME }} --type zip --src-path ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/deployfile.zip
